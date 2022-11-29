@@ -1,14 +1,18 @@
-const http = require('http');
+const express  = require('express');
 
-const hostname = '127.0.0.1';
-const port = 80;
+const app = express();
+const port = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+app.get('/water', (req, res) => {
+  console.log(`${req.ip} is asking for water`);
+  res.send('Here is some water for you');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.get('/food', (req, res) => {
+  console.log(`${req.ip} is asking for food`);
+  res.send('Here is some food for you');
+})
+
+app.listen(port, () =>{
+  console.log(`Expense Tracker backend listening on port ${port}`);
+})
